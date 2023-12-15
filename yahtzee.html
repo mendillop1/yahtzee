@@ -65,6 +65,7 @@ var rolls = 0;
         d = document.getElementById("s"+i);
         d.innerHTML = f[i] * i;
         locked[i] = true;
+        
         for (var i=0;i<5;i++)
         {
         d = document.getElementById("d"+i);
@@ -72,6 +73,11 @@ var rolls = 0;
         h[i] = false;
         
         }
+
+        for(i=0;i<7;i++) {
+            f[i] = 0;
+        }
+
         rolls = 0;
         }
         
@@ -93,27 +99,48 @@ var rolls = 0;
         }
     }
 
-    function kind(i) {
+    function threekind(i) {
+        if(!locked[i]) {
+        
         var sum = 0;
-    
 
         for (j=0;j<5;j++)
         {
             sum = sum + v[j];
         }
         
+        
         d = document.getElementById("s"+ i);
         d.innerHTML = sum;
         
-        for (var i=0;i<5;i++)
+        for (var k=0;k<5;k++)
         {
-        d = document.getElementById("d"+i);
+        d = document.getElementById("d"+k);
         d.src="pix/dice0.gif";
-        h[i] = false;
+        h[k] = false;
         
         }
-        
+
+        rolls = 0;
     }
+    }
+
+    function showKindScore(i) {
+        
+        var sum = 0;
+
+        for (j=0;j<5;j++)
+        {
+            sum = sum + v[j];
+        }
+        
+        
+        d = document.getElementById("s"+ i);
+        d.innerHTML = sum;
+
+
+    }
+
     
 </script>
 
@@ -147,11 +174,11 @@ var rolls = 0;
         <td class="c" rowspan="5"> <button class="b"> New Game </button> </td> </tr>
 
 <tr><td  class="a"> 3 of a kind  </td> 
-    <td id="s7" onClick="kind(7)" class="b"> </td> </tr>
+    <td id="s7" onmouseover="showKindScore(7)" onmouseout="clr(7)" onClick="threekind(7)" class="b"> </td> </tr>
 <tr><td  class="a"> 4 of a kind  </td> 
-    <td id="s8" onClick="kind(8)" class="b"> </td> </tr>
+    <td id="s8" onClick="kind(4)" class="b"> </td> </tr>
 <tr><td  class="a"> Yahtzee  </td> 
-    <td id="s9" onClick="kind(9)" class="b"> </td> </tr>
+    <td id="s9" onClick="kind(5)" class="b"> </td> </tr>
 <tr><td  class="a"> Total  </td> <td class="b"> </td> </tr>
 
 
