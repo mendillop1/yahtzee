@@ -13,11 +13,12 @@ h1 {text-align: center;}
 div.a {text-align: center;}
 table.t {margin-left:auto;margin-right:auto;width:100%;}
 
-td.a{text-align: right;width:30%}
+td.a{text-align: right;width:35%;font-family: Arial, Helvetica, sans-serif;}
 td.b {border: 1px #efefef inset; background-color: #AEAFFF;width:2em;}
 td.c {text-align:center;}
 
-button.b {color:#F5E6E3; background-color: #5F00CA; margin-right: 20px;}
+button.b {color:#F5E6E3; background-color: #5F00CA; margin-right: 20px;height:35px;width:50px; font-size: large;font-family: 'Times New Roman', Times, serif;}
+button.c {color:#030832; background-color: #B2BDBF; margin-right: 20px;height:35px;font-size:large;font-family: 'Times New Roman', Times, serif;}
 -->
 
 </style>
@@ -238,7 +239,7 @@ function newGame() {
     <img id="d3" onClick="hold(3)" src="pix/dice0.gif">
     <img id="d4" onClick="hold(4)" src="pix/dice0.gif">
 </div>
-<br><br><br>
+<br><br><br><br><br>
 <table class="t">
 <tr><td  class="a"> 1's   </td> 
     <td id="s1" onmouseover="showScore(1)" onmouseout="clr(1)" onClick="src(1)" class="b"> </td> 
@@ -256,7 +257,7 @@ function newGame() {
 <tr><td  class="a"> 6's   </td> 
     <td id="s6" onmouseover="showScore(6)" onmouseout="clr(6)" onClick="src(6)" class="b"> </td> 
     
-        <td class="c" rowspan="5"> <button class="b" onClick="newGame()"> New Game </button> </td> </tr>
+        <td class="c" rowspan="5"> <button class="c" onClick="newGame()"> New game </button> </td> </tr>
 
 <tr><td  class="a"> 3 of a kind  </td> 
     <td id="s7" onmouseover="showKindScore(7)" onmouseout="clr(7)" onClick="threekind(7)" class="b"> </td> </tr>
