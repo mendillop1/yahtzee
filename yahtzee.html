@@ -13,7 +13,7 @@ h1 {text-align: center;}
 div.a {text-align: center;}
 table.t {margin-left:auto;margin-right:auto;}
 
-
+td.a{text-align: right;}
 td.b {border: 2px #efefef inset; background-color: #AEAFFF;width:3em;}
 td.c {text-align:right; width: 100px;}
 
@@ -28,8 +28,15 @@ button.b {color:#F5E6E3; background-color: #5F00CA; margin-right: 20px;}
 <script language="Javascript">
 var v = new Array(0,0,0,0,0);
 var h = new Array(false,false,false,false,false);
+var f = new Array(0,0,0,0,0,0,0);
+var locked = new Array(false,false,false,false,false,false);
+var rolls = 0;
 
     function roll() {
+
+        if(rolls<3) {
+
+        f[1] = f[2] = f[3] = f[4] = f[5] = f[6] = 0;
 
         for (var i=0;i<5;i++)
         {
@@ -38,7 +45,10 @@ var h = new Array(false,false,false,false,false);
         v[i] = Math.floor(6*Math.random())+1;
         d.src="pix/dice" + v[i] + ".gif";
         }  
+        f[v[i]]++
         }
+    }
+        rolls++;
     }
     
     function hold(i) {
@@ -46,6 +56,63 @@ var h = new Array(false,false,false,false,false);
         h[i] = !h[i];
         if(h[i]) {d.src="pix/diceX" + v[i] + ".gif";}
         else     {d.src="pix/dice" + v[i] + ".gif";} 
+    }
+
+    function src(i) {
+
+        if(!locked[i]) {
+       
+        d = document.getElementById("s"+i);
+        d.innerHTML = f[i] * i;
+        locked[i] = true;
+        for (var i=0;i<5;i++)
+        {
+        d = document.getElementById("d"+i);
+        d.src="pix/dice0.gif";
+        h[i] = false;
+        
+        }
+        rolls = 0;
+        }
+        
+    }
+
+    function showScore(i) {
+
+        d = document.getElementById("s"+i);
+        if(!locked[i]) {
+        d.innerHTML = f[i] * i;
+        }
+    }
+
+    function clr(i) {
+        
+        if(!locked[i]) {
+        d = document.getElementById("s"+i);
+        d.innerHTML = " ";
+        }
+    }
+
+    function kind(i) {
+        var sum = 0;
+    
+
+        for (j=0;j<5;j++)
+        {
+            sum = sum + v[j];
+        }
+        
+        d = document.getElementById("s"+ i);
+        d.innerHTML = sum;
+        
+        for (var i=0;i<5;i++)
+        {
+        d = document.getElementById("d"+i);
+        d.src="pix/dice0.gif";
+        h[i] = false;
+        
+        }
+        
     }
     
 </script>
@@ -61,21 +128,30 @@ var h = new Array(false,false,false,false,false);
 </div>
 <br><br>
 <table class="t" border="2">
-<tr><td  class="a"> 1's   </td> <td class="b"> </td> 
+<tr><td  class="a"> 1's   </td> 
+    <td id="s1" onmouseover="showScore(1)" onmouseout="clr(1)" onClick="src(1)" class="b"> </td> 
     
         <td class="c" rowspan="5"> <button class="b" onClick="roll()"> Roll </button> </td> </tr>
 
-<tr><td  class="a"> 2's   </td> <td class="b"> </td> </tr>
-<tr><td  class="a"> 3's   </td> <td class="b"> </td> </tr>
-<tr><td  class="a"> 4's   </td> <td class="b"> </td> </tr>
-<tr><td  class="a"> 5's   </td> <td class="b"> </td> </tr>
-<tr><td  class="a"> 6's   </td> <td class="b"> </td> 
+<tr><td  class="a"> 2's   </td> 
+    <td id="s2" onmouseover="showScore(2)" onmouseout="clr(2)" onClick="src(2)" class="b"> </td> </tr>
+<tr><td  class="a"> 3's   </td> 
+    <td id="s3" onmouseover="showScore(3)" onmouseout="clr(3)" onClick="src(3)" class="b"> </td> </tr>
+<tr><td  class="a"> 4's   </td> 
+    <td id="s4" onmouseover="showScore(4)" onmouseout="clr(4)" onClick="src(4)" class="b"> </td> </tr>
+<tr><td  class="a"> 5's   </td> 
+    <td id="s5" onmouseover="showScore(5)" onmouseout="clr(5)" onClick="src(5)" class="b"> </td> </tr>
+<tr><td  class="a"> 6's   </td> 
+    <td id="s6" onmouseover="showScore(6)" onmouseout="clr(6)" onClick="src(6)" class="b"> </td> 
     
         <td class="c" rowspan="5"> <button class="b"> New Game </button> </td> </tr>
 
-<tr><td  class="a"> 3 of a kind  </td> <td class="b"> </td> </tr>
-<tr><td  class="a"> 4 of a kind  </td> <td class="b"> </td> </tr>
-<tr><td  class="a"> Yahtzee  </td> <td class="b"> </td> </tr>
+<tr><td  class="a"> 3 of a kind  </td> 
+    <td id="s7" onClick="kind(7)" class="b"> </td> </tr>
+<tr><td  class="a"> 4 of a kind  </td> 
+    <td id="s8" onClick="kind(8)" class="b"> </td> </tr>
+<tr><td  class="a"> Yahtzee  </td> 
+    <td id="s9" onClick="kind(9)" class="b"> </td> </tr>
 <tr><td  class="a"> Total  </td> <td class="b"> </td> </tr>
 
 
