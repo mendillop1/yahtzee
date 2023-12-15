@@ -11,10 +11,13 @@
     
 h1 {text-align: center;}
 div.a {text-align: center;}
-table.t {margin-left:auto;margin-right:auto}
-button.b {color:#F5E6E3; background-color: #5F00CA; margin-right: 30px;}
+table.t {margin-left:auto;margin-right:auto;}
 
-td.c{text-align: right; width: 100px;}
+
+td.b {border: 2px #efefef inset; background-color: #AEAFFF;width:3em;}
+td.c {text-align:right; width: 100px;}
+
+button.b {color:#F5E6E3; background-color: #5F00CA; margin-right: 20px;}
 -->
 
 </style>
@@ -22,20 +25,45 @@ td.c{text-align: right; width: 100px;}
 
 <body>
 
+<script language="Javascript">
+var v = new Array(0,0,0,0,0);
+var h = new Array(false,false,false,false,false);
+
+    function roll() {
+
+        for (var i=0;i<5;i++)
+        {
+        if(!h[i]) {
+        d = document.getElementById("d"+i);
+        v[i] = Math.floor(6*Math.random())+1;
+        d.src="pix/dice" + v[i] + ".gif";
+        }  
+        }
+    }
+    
+    function hold(i) {
+        d = document.getElementById("d"+i); 
+        h[i] = !h[i];
+        if(h[i]) {d.src="pix/diceX" + v[i] + ".gif";}
+        else     {d.src="pix/dice" + v[i] + ".gif";} 
+    }
+    
+</script>
+
 <h1> Yahtzee </h1>
 
 <div class="a">
-    <img src="pix/dice0.gif">
-    <img src="pix/dice0.gif">
-    <img src="pix/dice0.gif">
-    <img src="pix/dice0.gif">
-    <img src="pix/dice0.gif">
+    <img id="d0" onClick="hold(0)" src="pix/dice0.gif">
+    <img id="d1" onClick="hold(1)" src="pix/dice0.gif">
+    <img id="d2" onClick="hold(2)" src="pix/dice0.gif">
+    <img id="d3" onClick="hold(3)" src="pix/dice0.gif">
+    <img id="d4" onClick="hold(4)" src="pix/dice0.gif">
 </div>
-
+<br><br>
 <table class="t" border="2">
 <tr><td  class="a"> 1's   </td> <td class="b"> </td> 
     
-    <td class="c" rowspan="5"> <button class="b" onclick="roll()"> Roll </button></td> </tr>
+        <td class="c" rowspan="5"> <button class="b" onClick="roll()"> Roll </button> </td> </tr>
 
 <tr><td  class="a"> 2's   </td> <td class="b"> </td> </tr>
 <tr><td  class="a"> 3's   </td> <td class="b"> </td> </tr>
@@ -43,7 +71,7 @@ td.c{text-align: right; width: 100px;}
 <tr><td  class="a"> 5's   </td> <td class="b"> </td> </tr>
 <tr><td  class="a"> 6's   </td> <td class="b"> </td> 
     
-    <td class="c" rowspan="5"> <button class="b"> New Game </button> </td> </tr>
+        <td class="c" rowspan="5"> <button class="b"> New Game </button> </td> </tr>
 
 <tr><td  class="a"> 3 of a kind  </td> <td class="b"> </td> </tr>
 <tr><td  class="a"> 4 of a kind  </td> <td class="b"> </td> </tr>
