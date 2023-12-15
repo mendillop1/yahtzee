@@ -29,8 +29,9 @@ button.b {color:#F5E6E3; background-color: #5F00CA; margin-right: 20px;}
 var v = new Array(0,0,0,0,0);
 var h = new Array(false,false,false,false,false);
 var f = new Array(0,0,0,0,0,0,0);
-var locked = new Array(false,false,false,false,false,false);
+var locked = new Array(false,false,false,false,false,false,false,false,false,false);
 var rolls = 0;
+var total = 0;
 
     function roll() {
 
@@ -101,9 +102,7 @@ var rolls = 0;
 
     function threekind(i) {
         
-        
         if(!locked[i]) {
-        
         
         var threeCount = false;
         
@@ -115,14 +114,14 @@ var rolls = 0;
         if(threeCount) {
 
         var sum = 0;
+        locked[i] = true;
 
         for (j=0;j<5;j++)
         {
             sum = sum + v[j];
         }
         
-        locked[i] = true;
-        d = document.getElementById("s"+ i);
+        d = document.getElementById("s"+i);
         d.innerHTML = sum;
         
         for (var k=0;k<5;k++)
@@ -136,34 +135,35 @@ var rolls = 0;
         for(i=0;i<7;i++) {
             f[i] = 0;
         }
-    
+     
         rolls = 0;
+       
     } 
     }
     }
 
-    function fourkind() {
+    function fourkind(i) {
          
-        if(!locked[i]) {
+        if(!locked[8]) {
         
         var fourCount = false;
         
         for(i=0;i<7;i++) {
             if(f[i] >= 4)
-            fourCount =true;
+            fourCount = true;
         }
         
         if(fourCount) {
 
         var sum = 0;
+        locked[8] = true;
 
         for (j=0;j<5;j++)
         {
             sum = sum + v[j];
         }
         
-        locked[i] = true;
-        d = document.getElementById("s"+ i);
+        d = document.getElementById("s8");
         d.innerHTML = sum;
         
         for (var k=0;k<5;k++)
@@ -179,10 +179,56 @@ var rolls = 0;
         }
     
         rolls = 0;
+    
     } 
     }
 
     }
+
+    function fivekind(i) {
+         
+         if(!locked[9]) {
+         
+         var fiveCount = false;
+         
+         for(i=0;i<7;i++) {
+             if(f[i] >= 5)
+             fiveCount = true;
+         }
+         
+         if(fiveCount) {
+ 
+         var sum = 0;
+         locked[9] = true;
+ 
+         for (j=0;j<5;j++)
+         {
+             sum = sum + v[j];
+         }
+         
+         d = document.getElementById("s9");
+         d.innerHTML = sum;
+         
+         for (var k=0;k<5;k++)
+         {
+         d = document.getElementById("d"+k);
+         d.src="pix/dice0.gif";
+         h[k] = false;
+         
+         }
+ 
+         for(i=0;i<7;i++) {
+             f[i] = 0;
+         }
+     
+         rolls = 0;
+     
+     } 
+        else 
+
+     }
+ 
+     }
 
     function showKindScore(i) {
         
@@ -238,7 +284,7 @@ var rolls = 0;
 <tr><td  class="a"> 4 of a kind  </td> 
     <td id="s8" onmouseover="showKindScore(8)" onmouseout="clr(8)" onClick="fourkind(8)" class="b"> </td> </tr>
 <tr><td  class="a"> Yahtzee  </td> 
-    <td id="s9" onClick="kind(5)" class="b"> </td> </tr>
+    <td id="s9" onmouseover="showKindScore(9)" onmouseout="clr(9)" onClick="fivekind(9)" class="b"> </td> </tr>
 <tr><td  class="a"> Total  </td> <td class="b"> </td> </tr>
 
 
