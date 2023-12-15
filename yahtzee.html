@@ -31,13 +31,13 @@ var h = new Array(false,false,false,false,false);
 var f = new Array(0,0,0,0,0,0,0);
 var locked = new Array(false,false,false,false,false,false,false,false,false);
 var rolls = 0;
-var total = 0;
+var score = 0;
 
 function roll() {
 
-    if(rolls<3) {
+    if(rolls<3) { 
 
-    f[1] = f[2] = f[3] = f[4] = f[5] = f[6] = 0;
+        f[1] = f[2] = f[3] = f[4] = f[5] = f[6] = 0;
 
         for (var i=0;i<5;i++) {
         
@@ -68,7 +68,9 @@ function src(i) {
         d = document.getElementById("s"+i);
         d.innerHTML = f[i] * i;
         locked[i] = true;
+        totalScore(f[i]*i);
         resetDice();
+        
     }
         
 }
@@ -96,12 +98,12 @@ function threekind(i) {
     if(!locked[i]) {
         
         if(count()>=3) {
-
+            var sum = sumDice(); 
             locked[i] = true;
             d = document.getElementById("s"+i);
-            d.innerHTML = sumDice();
+            d.innerHTML = sum;
+            totalScore(sum);
             resetDice();
-            rolls = 0;
 
        } 
     }
@@ -112,86 +114,54 @@ function fourkind(i) {
     if(!locked[i]) {
      
         if(count()>=4) {
-
+            var sum = sumDice();
             locked[i] = true;
-            d = document.getElementById("s8");
-            d.innerHTML = sumDice();
+            d = document.getElementById("s"+i);
+            d.innerHTML = sum;
+            totalScore(sum);
             resetDice();
-            rolls = 0;
     
         } 
     }
 
 }
 
-    function fivekind(i) {
+function fivekind(i) {
          
-         if(!locked[9]) {
-         
-         var fiveCount = false;
-         
-         for(i=0;i<7;i++) {
-             if(f[i] >= 5)
-             fiveCount = true;
-         }
-         
-         if(fiveCount) {
- 
-         var sum = 0;
-         locked[9] = true;
- 
-         for (j=0;j<5;j++)
-         {
-             sum = sum + v[j];
-         }
-         
-         d = document.getElementById("s9");
-         d.innerHTML = sum;
-         
-         for (var k=0;k<5;k++)
-         {
-         d = document.getElementById("d"+k);
-         d.src="pix/dice0.gif";
-         h[k] = false;
-         
-         }
- 
-         for(i=0;i<7;i++) {
-             f[i] = 0;
-         }
+    if(!locked[i]) {
      
-         rolls = 0;
-     
-     } 
-     
-
-     }
+        if(count()>=5) {
+            var sum = sumDice();
+            locked[i] = true;
+            d = document.getElementById("s"+i);
+            d.innerHTML = sum;
+            totalScore(sum);
+            resetDice();
  
-     }
+        } 
+    }
+ 
+}
 
-    function showKindScore(i) {
+function showKindScore(i) {
         
-        if(!locked[i]) {
-        var sum = 0;
+    if(!locked[i]) {
 
-        for (j=0;j<5;j++)
-        {
-            sum = sum + v[j];
-        }
-        
-        
         d = document.getElementById("s"+ i);
-        d.innerHTML = sum;
+        d.innerHTML = sumDice();
 
     }
-    }
+}
 
-    function total() {
+function totalScore(a) {
 
+    score = score + a;
+    d = document.getElementById("total");
+    d.innerHTML = score;
+    
+}
 
-    }
-
-    function resetDice() {
+function resetDice() {
 
         for (var i=0;i<5;i++) {
            
