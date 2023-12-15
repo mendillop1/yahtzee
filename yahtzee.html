@@ -100,8 +100,20 @@ var rolls = 0;
     }
 
     function threekind(i) {
+        
+        
         if(!locked[i]) {
         
+        
+        var threeCount = false;
+        
+        for(i=0;i<7;i++) {
+            if(f[i] >= 3)
+            threeCount =true;
+        }
+        
+        if(threeCount) {
+
         var sum = 0;
 
         for (j=0;j<5;j++)
@@ -109,7 +121,7 @@ var rolls = 0;
             sum = sum + v[j];
         }
         
-        
+        locked[i] = true;
         d = document.getElementById("s"+ i);
         d.innerHTML = sum;
         
@@ -121,12 +133,60 @@ var rolls = 0;
         
         }
 
+        for(i=0;i<7;i++) {
+            f[i] = 0;
+        }
+    
         rolls = 0;
+    } 
     }
+    }
+
+    function fourkind() {
+         
+        if(!locked[i]) {
+        
+        var fourCount = false;
+        
+        for(i=0;i<7;i++) {
+            if(f[i] >= 4)
+            fourCount =true;
+        }
+        
+        if(fourCount) {
+
+        var sum = 0;
+
+        for (j=0;j<5;j++)
+        {
+            sum = sum + v[j];
+        }
+        
+        locked[i] = true;
+        d = document.getElementById("s"+ i);
+        d.innerHTML = sum;
+        
+        for (var k=0;k<5;k++)
+        {
+        d = document.getElementById("d"+k);
+        d.src="pix/dice0.gif";
+        h[k] = false;
+        
+        }
+
+        for(i=0;i<7;i++) {
+            f[i] = 0;
+        }
+    
+        rolls = 0;
+    } 
+    }
+
     }
 
     function showKindScore(i) {
         
+        if(!locked[i]) {
         var sum = 0;
 
         for (j=0;j<5;j++)
@@ -138,7 +198,7 @@ var rolls = 0;
         d = document.getElementById("s"+ i);
         d.innerHTML = sum;
 
-
+    }
     }
 
     
@@ -176,7 +236,7 @@ var rolls = 0;
 <tr><td  class="a"> 3 of a kind  </td> 
     <td id="s7" onmouseover="showKindScore(7)" onmouseout="clr(7)" onClick="threekind(7)" class="b"> </td> </tr>
 <tr><td  class="a"> 4 of a kind  </td> 
-    <td id="s8" onClick="kind(4)" class="b"> </td> </tr>
+    <td id="s8" onmouseover="showKindScore(8)" onmouseout="clr(8)" onClick="fourkind(8)" class="b"> </td> </tr>
 <tr><td  class="a"> Yahtzee  </td> 
     <td id="s9" onClick="kind(5)" class="b"> </td> </tr>
 <tr><td  class="a"> Total  </td> <td class="b"> </td> </tr>
